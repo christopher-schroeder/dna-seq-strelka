@@ -54,6 +54,7 @@ rule gatk_baserecalibratorspark:
         mem_mb=10000,
     threads: 8
     wrapper:
+        "v2.0.0/bio/gatk/baserecalibratorspark"
 
 
 rule gatk_applybqsr_spark:
@@ -92,7 +93,7 @@ rule link_alignment_index:
     resources:
         mem_mb=128,
     shell:
-        "[ -f {output} ] || ln {input} {output}"
+        "ln {input} {output}"
 
 
 rule samtools_index:
