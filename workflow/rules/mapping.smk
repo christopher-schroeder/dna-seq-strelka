@@ -54,7 +54,7 @@ rule gatk_baserecalibratorspark:
         mem_mb=10000,
     threads: 8
     wrapper:
-        "v2.0.0/bio/gatk/baserecalibratorspark"
+        "v2.2.0/bio/gatk/baserecalibratorspark"
 
 
 rule gatk_applybqsr_spark:
