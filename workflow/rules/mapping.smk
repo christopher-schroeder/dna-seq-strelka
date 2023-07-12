@@ -26,7 +26,7 @@ rule map_reads:
         "v1.25.0/bio/bwa-memx/mem"
 
 
-def gatk_baserecalibratorspar_extra():
+def gatk_baserecalibratorspark_extra():
     if target:
         return f"-L {target}"
     return ""
@@ -41,7 +41,7 @@ rule gatk_baserecalibratorspark:
     output:
         recal_table="results/recal_table/{sample}.grp",
     params:
-        extra=gatk_baserecalibratorspar_extra(),
+        extra=gatk_baserecalibratorspark_extra(),
         java_opts="",  # optional
         #spark_runner="",  # optional, local by default
         #spark_v1.25.0="",  # optional
@@ -54,7 +54,6 @@ rule gatk_baserecalibratorspark:
         mem_mb=10000,
     threads: 8
     wrapper:
-        "v2.0.0/bio/gatk/baserecalibratorspark"
 
 
 rule gatk_applybqsr_spark:
@@ -93,7 +92,7 @@ rule link_alignment_index:
     resources:
         mem_mb=128,
     shell:
-        "ln {input} {output}"
+        "[ -f {output} ] || ln {input} {output}"
 
 
 rule samtools_index:
